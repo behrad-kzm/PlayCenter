@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  PlayCenter
+
+  Created by Behrad Kazemi on 7/15/20.
+  Copyright © 2020 Behrad Kazemi. All rights reserved.
+*/
+"Default_SongTitle" = "Untitled Song";
+"Default_ArtworkPlaceholder" = "ArtworkPlaceholder";
+"Default_ArtistName" = "Unknown Artist";
+
+"UpNext" = "Up Next";
+//"Default_ArtistName" = "";
