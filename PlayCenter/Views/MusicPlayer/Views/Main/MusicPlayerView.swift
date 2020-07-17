@@ -15,32 +15,85 @@ struct MusicPlayerView: View {
   @State var viewModel: MusicPlayerViewModel
   @State var upNexts: [SongViewModel]
   @State var showUpNext = false
+  
   var body: some View {
     NavigationView{
       GeometryReader { proxy in
-          VStack(alignment: .center,spacing: 8){
-            self.makeArtwork(proxy)
-            Text(self.viewModel.artistName)
-              .font(.callout)
-            Text(self.viewModel.songTitle)
-              .font(.footnote)
-            self.makeSlider(proxy).padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
-            Spacer()
+        VStack(alignment: .center,spacing: 8){
+          self.makeArtwork(proxy)
+          Text(self.viewModel.artistName)
+            .font(.callout)
+          Text(self.viewModel.songTitle)
+            .font(.footnote)
+          self.makeSlider(proxy).padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
+          Spacer()
+          MusicPlayerDockView(previousAction: {
             
-          }
+          }, nextAction: {
+            
+          }, playPauseAction: {
+            
+          }, shuffleAction: {
+            
+          }, repeatAction: {
+            
+          })
+            .frame(width: proxy.size.width, height: 100, alignment: .center)
+            
+          Spacer()
+          self.makeUpNextButton()
+        }
       }.navigationBarItems(trailing:
-          Button(action: {
-              self.showUpNext.toggle()
-          }) {
-              Image(systemName: "bell.circle.fill")
-                  .font(Font.system(.title))
-          }
+        Button(action: {
+          self.showUpNext.toggle()
+        }) {
+          Image(systemName: "bell.circle.fill")
+            .font(Font.system(.title))
+        }
       )
     }.sheet(isPresented: self.$showUpNext) {
-        UpNextSongsView(upNexts: self.upNexts)
+      UpNextSongsView(upNexts: self.upNexts)
     }
   }
+  
+}
 
+struct MusicPlayerView_Previews: PreviewProvider {
+  static var previews: some View {
+    MusicPlayerView(viewModel: MusicPlayerViewModel.defaultValue, upNexts: [SongViewModel.defaultValue])
+  }
+}
+
+//MARK: - Make Views
+extension MusicPlayerView {
+  
+  func makeUpNextButton() -> some View {
+    return ZStack(){
+      VStack(){
+        
+        Image("ArrowUp")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 8, height: 8, alignment: .center)
+        Text("UPNEXT")
+          .font(.caption)
+          .fontWeight(.bold)
+      }
+    }.gesture(
+    DragGesture(minimumDistance: 25)
+      .onChanged({ (value) in
+        let distance = abs(value.location.y - value.startLocation.y)
+        if distance > 100 {
+          self.showUpNext.toggle()
+        }
+      })
+    )
+    .gesture(
+      TapGesture().onEnded({ (_) in
+        self.showUpNext.toggle()
+      })
+    )
+  }
   
   func makeArtwork(_ proxy: GeometryProxy) -> some View {
     let width = proxy.size.width * 0.6
@@ -54,13 +107,7 @@ struct MusicPlayerView: View {
     return ZStack {
       Slider(value: $sliderValue, in: -100...100, step: 0.1).padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
       
-      }.frame(width: width, height: 16)
+    }.frame(width: width, height: 16)
   }
   
-}
-
-struct MusicPlayerView_Previews: PreviewProvider {
-  static var previews: some View {
-    MusicPlayerView(viewModel: MusicPlayerViewModel.defaultValue, upNexts: [SongViewModel.defaultValue])
-  }
 }

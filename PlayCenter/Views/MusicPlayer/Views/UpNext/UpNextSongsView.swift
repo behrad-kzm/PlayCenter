@@ -34,9 +34,11 @@ struct UpNextSongsView: View {
   func makeList(_ proxy: GeometryProxy) -> some View {
     let cellSize = CGSize(width: proxy.size.width, height: 48)
     return List(self.upNexts){ songVM in
-      SongView(viewModel: songVM)
-        .frame(width: cellSize.width, height: cellSize.height, alignment: .leading)
-    }
+          SongView(viewModel: songVM)
+            .frame(width: cellSize.width, height: cellSize.height, alignment: .leading)
+    
+    }.onAppear { UITableView.appearance().tableFooterView = UIView() }
+    .onDisappear { UITableView.appearance().tableFooterView = nil }
     
   }
 }

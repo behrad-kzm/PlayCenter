@@ -26,7 +26,7 @@ struct SongView: View {
         .clipShape(Circle()).overlay(Circle().foregroundColor(.clear))
 //        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
         .frame(width: proxy.size.height, height: proxy.size.height)
-      .shadow(radius: 10)
+      .shadow(radius: 4)
       VStack(alignment: .leading, spacing: 5) {
         Text(viewModel.title)
           .font(.callout)
