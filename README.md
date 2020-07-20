@@ -1,2 +1,2 @@
 # PlayCenter
-Simple Music player with SwiftUI
+Simple Music player with SwiftUI + Combine + The Clean Architecture
