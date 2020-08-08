@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import Domain
 
 struct Platforms {
-  
+  let soundCore: Domain.SoundUsecaseProvider
 }

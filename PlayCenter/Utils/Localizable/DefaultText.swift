@@ -11,5 +11,6 @@ enum DefaultText: String {
   case songTitle = "Default_SongTitle"
   case artworkPlaceholder = "Default_ArtworkPlaceholder"
   case artistName = "Default_ArtistName"
+  case albumName = "Default_AlbumName"
   
 }

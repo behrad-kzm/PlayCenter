@@ -8,6 +8,7 @@
 "Default_SongTitle" = "Untitled Song";
 "Default_ArtworkPlaceholder" = "ArtworkPlaceholder";
 "Default_ArtistName" = "Unknown Artist";
+"Default_AlbumName" = "Untitled Album";
 
 "UpNext" = "Up Next";
 //"Default_ArtistName" = "";
