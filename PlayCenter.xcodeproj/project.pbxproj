@@ -39,6 +39,9 @@
 		044DACE124C595E700236413 /* SoundUsecaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DACDF24C595E700236413 /* SoundUsecaseProvider.swift */; };
 		044DACE224C595E700236413 /* AudioFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DACE024C595E700236413 /* AudioFileHandler.swift */; };
 		044DACE524C5960700236413 /* FullPlayerUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DACE424C5960600236413 /* FullPlayerUsecase.swift */; };
+		0476B18C24DF0717003DB718 /* UpNextVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476B18B24DF0717003DB718 /* UpNextVM.swift */; };
+		0476B19624DF45C2003DB718 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476B19524DF45C2003DB718 /* Router.swift */; };
+		0476B19B24DF462B003DB718 /* ControlCenterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476B19824DF462B003DB718 /* ControlCenterRouter.swift */; };
 		049C863424C2D51000FBD291 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C863324C2D51000FBD291 /* RoundedCorner.swift */; };
 		049C864324C2F08800FBD291 /* SoundCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049C863A24C2F08800FBD291 /* SoundCore.framework */; };
 		049C864A24C2F08800FBD291 /* SoundCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C864924C2F08800FBD291 /* SoundCoreTests.swift */; };
@@ -169,6 +172,9 @@
 		044DACDF24C595E700236413 /* SoundUsecaseProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundUsecaseProvider.swift; sourceTree = "<group>"; };
 		044DACE024C595E700236413 /* AudioFileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFileHandler.swift; sourceTree = "<group>"; };
 		044DACE424C5960600236413 /* FullPlayerUsecase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPlayerUsecase.swift; sourceTree = "<group>"; };
+		0476B18B24DF0717003DB718 /* UpNextVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextVM.swift; sourceTree = "<group>"; };
+		0476B19524DF45C2003DB718 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0476B19824DF462B003DB718 /* ControlCenterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenterRouter.swift; sourceTree = "<group>"; };
 		049C863324C2D51000FBD291 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		049C863A24C2F08800FBD291 /* SoundCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SoundCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		049C863C24C2F08800FBD291 /* SoundCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundCore.h; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 		042B895824DBFA46001472EB /* ControlCenter */ = {
 			isa = PBXGroup;
 			children = (
+				0476B19724DF460B003DB718 /* Router */,
 				042B895A24DBFA5E001472EB /* ViewModel */,
 				042B895924DBFA52001472EB /* View */,
 			);
@@ -445,27 +452,36 @@
 		044DACDE24C595CF00236413 /* SoundCore */ = {
 			isa = PBXGroup;
 			children = (
-				044DACE324C595EF00236413 /* FullAccess */,
+				044DACE324C595EF00236413 /* Protocols */,
 				044DACE024C595E700236413 /* AudioFileHandler.swift */,
 				044DACDF24C595E700236413 /* SoundUsecaseProvider.swift */,
 			);
 			path = SoundCore;
 			sourceTree = "<group>";
 		};
-		044DACE324C595EF00236413 /* FullAccess */ = {
+		044DACE324C595EF00236413 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				044DACE424C5960600236413 /* FullPlayerUsecase.swift */,
 			);
-			path = FullAccess;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		0476B18A24DE8727003DB718 /* UpNexts */ = {
 			isa = PBXGroup;
 			children = (
 				04FF79C324BF4CF40058B032 /* UpNextSongsView.swift */,
+				0476B18B24DF0717003DB718 /* UpNextVM.swift */,
 			);
 			path = UpNexts;
+			sourceTree = "<group>";
+		};
+		0476B19724DF460B003DB718 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0476B19824DF462B003DB718 /* ControlCenterRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		049C863224C2D4C300FBD291 /* RoundedCorners */ = {
@@ -570,6 +586,7 @@
 		04FF79CB24BF4F680058B032 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0476B19524DF45C2003DB718 /* Router.swift */,
 				04398DC824B7607900DA6CB2 /* AppDelegate.swift */,
 				04398DCA24B7607900DA6CB2 /* SceneDelegate.swift */,
 				04398DCE24B7607B00DA6CB2 /* Assets.xcassets */,
@@ -849,6 +866,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0476B19B24DF462B003DB718 /* ControlCenterRouter.swift in Sources */,
+				0476B19624DF45C2003DB718 /* Router.swift in Sources */,
 				042B895C24DBFA73001472EB /* ControlCenterVM.swift in Sources */,
 				04E1F64324C8CA1C001B3B42 /* CombineExtensions.swift in Sources */,
 				0440055524C6CC4100A3A868 /* Test1.mp3 in Sources */,
@@ -857,6 +876,7 @@
 				04B3F34824C02F63008568E3 /* SwiftUIBlur.swift in Sources */,
 				042B896524DD3600001472EB /* ControlCenterShapes.swift in Sources */,
 				042B896124DD354E001472EB /* ControlCenterComponents.swift in Sources */,
+				0476B18C24DF0717003DB718 /* UpNextVM.swift in Sources */,
 				04398DFE24B8DB3700DA6CB2 /* Application.swift in Sources */,
 				04FF79D424BF50A00058B032 /* Localizable+Ex.swift in Sources */,
 				04398DC924B7607900DA6CB2 /* AppDelegate.swift in Sources */,

@@ -23,4 +23,5 @@ public protocol FullPlayerUsecase {
 	func getPlayerInformation() -> AnyPublisher<PlayerInfo, Never>
 	func setSuffle(isSheffled: Bool)
 	func setRepeat(mode: MPRepeatType)
+  func setUpNext(list: [Playable])
 }

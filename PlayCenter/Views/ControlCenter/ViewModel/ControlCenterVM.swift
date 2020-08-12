@@ -20,18 +20,18 @@ class ControlCenterVM: ObservableObject {
   @Published var state = PlayerStatus.stopped
   @Published var isShuffle = false
   @Published var isRepeat = false
-  @Published var upNexts = [SongViewModel]()
   
   var metaDataStream: AnyPublisher<PlayerInfo, Never>
-  private let useCase: FullPlayerUsecase
+  let useCase: FullPlayerUsecase
+  let router: ControlCenterRouter
   
   private var cancellableSet: Set<AnyCancellable> = []
   
   
-  init(useCase: FullPlayerUsecase) {
-    self.useCase = useCase
+  init(router: ControlCenterRouter) {
+    self.useCase = router.platforms.soundCore.makeFullPlayerUsecase()
     self.metaDataStream = useCase.getPlayerInformation()
-    
+    self.router = router
     ///making state
     self.metaDataStream
       .receive(on: RunLoop.main).map { (info) -> PlayerStatus in
@@ -80,7 +80,6 @@ class ControlCenterVM: ObservableObject {
         return info.currentTime
       }.assign(to: \.currentTime, on: self)
       .store(in: &cancellableSet)
-    
   }
   
   //MARK: - functions

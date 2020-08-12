@@ -6,14 +6,21 @@
 //  Copyright © 2020 Behrad Kazemi. All rights reserved.
 //
 
-import Foundation
+import Domain
 struct SongViewModel: Identifiable {
+  
   let id = UUID()
   let title: String
-  let artworkPath: String
-//  let model: SongModel
+  let artwork: Data?
+  var model: Playable?
 }
 
 extension SongViewModel{
-  static let defaultValue = SongViewModel(title: DefaultText.songTitle.rawValue.localize, artworkPath: DefaultText.artworkPlaceholder.rawValue.localize)
+  static let defaultValue = SongViewModel(title: DefaultText.songTitle.rawValue.localize, artwork: nil, model: nil)
+}
+
+extension Playable {
+  func asSongViewModel() -> SongViewModel{
+    SongViewModel(title: self.loadTitle() ?? DefaultText.songTitle.rawValue.localize, artwork: self.loadArtwork(), model: self)
+  }
 }

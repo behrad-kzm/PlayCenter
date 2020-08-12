@@ -11,7 +11,7 @@ import SwiftUI
 struct ControlCenterView: View {
   
   //MARK: - Properties
-  @ObservedObject var viewModel: ControlCenterVM
+  @ObservedObject var viewModel: ControlCenterVM!
   @State var sliderValue: Double = 0.0
   @State var showUpNext = false
   @State var sliderIsSeeking = false
@@ -52,13 +52,13 @@ struct ControlCenterView: View {
         }
       }.edgesIgnoringSafeArea(.bottom)
     }.sheet(isPresented: self.$showUpNext) {
-      UpNextSongsView(upNexts: self.viewModel.upNexts)
+      UpNextSongsView(viewModel: UpNextVM(useCase: self.viewModel.useCase))
     }
   }
 }
 
 struct ControlCenterView_Previews: PreviewProvider {
   static var previews: some View {
-    ControlCenterView(viewModel: ControlCenterVM(useCase: Application.shared.package.soundCore.makeFullPlayerUsecase()))
+    ControlCenterView(viewModel: ControlCenterVM(router: ControlCenterRouter(platforms: Application.shared.package, navigationController: nil)))
   }
 }

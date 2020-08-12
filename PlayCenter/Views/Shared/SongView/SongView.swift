@@ -19,8 +19,14 @@ struct SongView: View {
   }
   
   func makeView(_ proxy: GeometryProxy) -> some View{
+    
+    var image = UIImage(named: DefaultText.artworkPlaceholder.rawValue.localize)!
+    if let safeData = viewModel.artwork, let safeImage = UIImage(data: safeData){
+      image = safeImage
+    }
+    
     return HStack(alignment: .center, spacing: 8) {
-      Image(viewModel.artworkPath)
+      Image(uiImage: image)
         .resizable()
         .aspectRatio(contentMode: .fill)
         .clipShape(Circle()).overlay(Circle().foregroundColor(.clear))

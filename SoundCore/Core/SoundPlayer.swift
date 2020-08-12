@@ -80,6 +80,18 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     
   }
   
+  public func setUpNext(list: [Playable]) {
+    print("TEST playingAudios->", playingAudios.count)
+    print("TEST list->", list.count)
+    if let safeModel = current, let currentIndex = playingAudios.firstIndex(of: safeModel) {
+      var sortedArray = Array(playingAudios[0 ..< currentIndex])
+      sortedArray.append(contentsOf: list)
+      playingAudios = sortedArray
+    }
+    
+    print("TEST playingAudios->", playingAudios.count)
+  }
+  
   public func setup(list: [Playable], index: Int){
     audios = list
     let safeIndex = (index >= list.count) ? (list.count - 1) : index

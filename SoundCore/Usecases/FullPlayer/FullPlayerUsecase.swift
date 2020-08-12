@@ -31,13 +31,15 @@ public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
   }
   
   public func getUpNext() -> AnyPublisher<[Playable], Never> {
-    return manager.currentObs.map({ (model) -> [Playable] in
-      if let safeModel = model, let currentIndex = self.manager.playingAudios.firstIndex(of: safeModel) {
-        let splitedArray = Array(self.manager.playingAudios[currentIndex ..< self.manager.playingAudios.count])
-        return splitedArray
-      }
-      return [Playable]()
-    }).eraseToAnyPublisher()
+    
+    return manager.currentObs
+      .map({ (model) -> [Playable] in
+        if let safeModel = model, let currentIndex = self.manager.playingAudios.firstIndex(of: safeModel) {
+          let splitedArray = Array(self.manager.playingAudios[currentIndex ..< self.manager.playingAudios.count].dropFirst())
+          return splitedArray
+        }
+        return [Playable]()
+      }).eraseToAnyPublisher()
   }
   
   public func pause() {
@@ -88,5 +90,8 @@ public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
   }
   public func setRepeat(mode: MPRepeatType) {
     manager.repeatType = mode
+  }
+  public func setUpNext(list: [Playable]) {
+    manager.setUpNext(list: list)
   }
 }
