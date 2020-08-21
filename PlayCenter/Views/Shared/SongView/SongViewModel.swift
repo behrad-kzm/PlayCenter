@@ -20,7 +20,7 @@ extension SongViewModel{
 }
 
 extension Playable {
-  func asSongViewModel() -> SongViewModel{
-    SongViewModel(title: self.loadTitle() ?? DefaultText.songTitle.rawValue.localize, artwork: self.loadArtwork(), model: self)
+  func asSongViewModel(loader: MetaDataLoader) -> SongViewModel{
+    SongViewModel(title: loader.loadTitle(for: self) ?? DefaultText.songTitle.rawValue.localize, artwork: loader.loadArtwork(for: self), model: self)
   }
 }

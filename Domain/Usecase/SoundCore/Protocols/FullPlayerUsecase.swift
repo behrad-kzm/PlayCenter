@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import MediaPlayer
 public protocol FullPlayerUsecase {
-	
 	func setup(models: [Playable], index: Int)
 	func next()
 	func previous()

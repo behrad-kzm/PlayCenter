@@ -34,7 +34,6 @@ extension ControlCenterView {
   func makeUpNextButton() -> some View {
     return ZStack(){
       VStack(){
-        
         Image("ArrowUp")
           .resizable()
           .aspectRatio(contentMode: .fit)
@@ -47,23 +46,14 @@ extension ControlCenterView {
   }
   
   func makeArtwork(_ proxy: GeometryProxy) -> some View {
-    let width = proxy.size.width * 0.6
-    let image: Image
-    if let safeArtworkData = self.viewModel.artwork, let safeImage = UIImage(data: safeArtworkData) {
-      image = Image(uiImage: safeImage)
-    } else {
-      image = Image(uiImage: UIImage(named: DefaultText.artworkPlaceholder.rawValue.localize)!)
-    }
-    
-    return image.resizable().aspectRatio(contentMode: .fill).frame(width: width, height: width).clipShape(Circle()).overlay(
-    Circle().stroke(Color.white, lineWidth: 3))
-    .shadow(radius: 10)
+    let width = proxy.size.width * 0.6    
+    let viewModel = CircularArtworkViewModel(model: self.viewModel.artwork)
+    return CircularArtworkView(viewModel: viewModel)
+      .frame(width: width, height: width)
     .padding(EdgeInsets(top: 32, leading: 0, bottom: 32, trailing: 0))
-
   }
   
   func makeSlider(_ proxy: GeometryProxy) -> some View {
-    
     let width = proxy.size.width * 0.9
     return ZStack {
       Slider(value: Binding(
@@ -82,7 +72,9 @@ extension ControlCenterView {
           self.sliderValue = value
         }
       }).padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
+      .accentColor(Color("PrimaryColor"))
       
     }.frame(width: width, height: 16)
   }
 }
+

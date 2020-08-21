@@ -71,25 +71,21 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
   
   // MARK: - Functions
   func seekTo(desiredTime time: TimeInterval){
-    print("settings time tp \(time) from \(audioPlayer.duration)")
     if audioPlayer.duration >= time && time >= 0{
-      print("This")
       audioPlayer.currentTime = time
-      print("That")
+    }else if time < 0 {
+      audioPlayer.currentTime = 0
+    }else if time > audioPlayer.duration{
+      audioPlayer.currentTime = audioPlayer.duration - 0.1
     }
-    
   }
   
   public func setUpNext(list: [Playable]) {
-    print("TEST playingAudios->", playingAudios.count)
-    print("TEST list->", list.count)
     if let safeModel = current, let currentIndex = playingAudios.firstIndex(of: safeModel) {
-      var sortedArray = Array(playingAudios[0 ..< currentIndex])
+      var sortedArray = Array(playingAudios[0 ... currentIndex])
       sortedArray.append(contentsOf: list)
       playingAudios = sortedArray
     }
-    
-    print("TEST playingAudios->", playingAudios.count)
   }
   
   public func setup(list: [Playable], index: Int){
@@ -100,7 +96,6 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
   }
   private func play(Model audio: Playable){
     do {
-      
       audioPlayer = try AVAudioPlayer(contentsOf: audio.url)
       audioPlayer.delegate = self
       status = .playing

@@ -11,10 +11,17 @@ import SwiftUI
 struct ControlCenterView: View {
   
   //MARK: - Properties
-  @ObservedObject var viewModel: ControlCenterVM!
+  @ObservedObject var viewModel: ControlCenterVM
   @State var sliderValue: Double = 0.0
   @State var showUpNext = false
   @State var sliderIsSeeking = false
+  
+  init(viewModel: ControlCenterVM){
+    self.viewModel = viewModel
+    self.sliderValue = viewModel.currentTime
+    self.showUpNext = false
+    self.sliderIsSeeking = false
+  }
   
   var body: some View {
     NavigationView{
@@ -41,24 +48,31 @@ struct ControlCenterView: View {
                 let distance = abs(value.location.y - value.startLocation.y)
                 if distance > 100 {
                   self.showUpNext.toggle()
+                  self.showUpNextIfNeeded()
                 }
               })
           )
             .gesture(
               TapGesture().onEnded({ (_) in
                 self.showUpNext.toggle()
+                self.showUpNextIfNeeded()
               })
           )
         }
       }.edgesIgnoringSafeArea(.bottom)
-    }.sheet(isPresented: self.$showUpNext) {
-      UpNextSongsView(viewModel: UpNextVM(useCase: self.viewModel.useCase))
+    }
+  }
+  
+  func showUpNextIfNeeded() {
+    if showUpNext {
+      showUpNext = false
+      self.viewModel.router.showUpNext()
     }
   }
 }
 
 struct ControlCenterView_Previews: PreviewProvider {
   static var previews: some View {
-    ControlCenterView(viewModel: ControlCenterVM(router: ControlCenterRouter(platforms: Application.shared.package, navigationController: nil)))
+    ControlCenterView(viewModel: ControlCenterVM(router: ControlCenterRouter(platforms: Application.shared.package)))
   }
 }

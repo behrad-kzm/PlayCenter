@@ -12,21 +12,24 @@ import Domain
 
 public class UpNextVM: ObservableObject {
   
-  @State var upNexts = [SongViewModel]()
+  @Published var upNexts = [SongViewModel]()
   
   var upNextStream: AnyPublisher<[Playable], Never>
-  let useCase: FullPlayerUsecase
+  let useCase: Domain.FullPlayerUsecase
+  let caches: Domain.MetaDataLoader
+  var router: UpNextSongsRouter
   
   private var cancellableSet: Set<AnyCancellable> = []
   
-  init(useCase: FullPlayerUsecase) {
-    self.useCase = useCase
-    print("asda sd")
+  init(router: UpNextSongsRouter) {
+    self.router = router
+    self.useCase = router.platforms.soundCore.makeFullPlayerUsecase()
+    self.caches = router.platforms.caches
     self.upNextStream = useCase.getUpNext()
     self.upNextStream
     .removeDuplicates()
-      .map { (items) -> [SongViewModel] in
-      return items.compactMap{$0.asSongViewModel()}
+      .map { [caches](items) -> [SongViewModel] in
+        return items.compactMap{$0.asSongViewModel(loader: caches)}
     }.assign(to: \.upNexts, on: self)
     .store(in: &cancellableSet)
   }

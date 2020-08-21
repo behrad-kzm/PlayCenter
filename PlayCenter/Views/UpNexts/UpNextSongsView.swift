@@ -47,14 +47,15 @@ struct UpNextSongsView: View {
   }
   
   func move(from source: IndexSet, to destination: Int) {
-    viewModel.upNexts.move(fromOffsets: source, toOffset: destination)
-    viewModel.upNext(list: viewModel.upNexts.compactMap{ $0.model})
+    var tempItems = viewModel.upNexts
+    tempItems.move(fromOffsets: source, toOffset: destination)
+    viewModel.upNext(list: tempItems.compactMap{ $0.model})
   }
 }
 
 struct UpNextSongsView_Previews: PreviewProvider {
   static var previews: some View {
-    UpNextSongsView(viewModel: UpNextVM(useCase: Application.shared.package.soundCore.makeFullPlayerUsecase()))
+    UpNextSongsView(viewModel: UpNextVM(router: UpNextSongsRouter(platforms: Application.shared.package)))
     //      .previewLayout(.sizeThatFits)
     //      .previewDisplayName("Default preview")
   }

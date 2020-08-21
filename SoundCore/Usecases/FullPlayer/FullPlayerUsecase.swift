@@ -13,9 +13,10 @@ import Combine
 public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
   
   let manager: SoundPlayer
-  
-  init(manager: SoundPlayer) {
+  let caches: MetaDataLoader
+  init(manager: SoundPlayer, caches: MetaDataLoader) {
     self.manager = manager
+    self.caches = caches
   }
   
   public func setup(models: [Playable], index: Int) {
@@ -33,7 +34,7 @@ public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
   public func getUpNext() -> AnyPublisher<[Playable], Never> {
     
     return manager.currentObs
-      .map({ (model) -> [Playable] in
+      .map({ [unowned self](model) -> [Playable] in
         if let safeModel = model, let currentIndex = self.manager.playingAudios.firstIndex(of: safeModel) {
           let splitedArray = Array(self.manager.playingAudios[currentIndex ..< self.manager.playingAudios.count].dropFirst())
           return splitedArray
@@ -85,12 +86,15 @@ public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
       return PlayerInfo(currentModel: self.manager.current, currentTime: self.manager.currentTime, isShuffle: self.manager.shuffled, repeatMode: self.manager.repeatType, status: self.manager.status, duration: duration)
     }.eraseToAnyPublisher()
   }
+  
   public func setSuffle(isSheffled: Bool) {
     manager.shuffled = isSheffled
   }
+  
   public func setRepeat(mode: MPRepeatType) {
     manager.repeatType = mode
   }
+  
   public func setUpNext(list: [Playable]) {
     manager.setUpNext(list: list)
   }

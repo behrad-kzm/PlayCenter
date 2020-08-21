@@ -15,17 +15,23 @@ import SwiftUI
 final class ControlCenterRouter: Router {
   
   // MARK: - Initialization
+  func makeModule() -> UIViewController{
+    return ControlCenterRouter.createModule(router: self)
+  }
   
   static func createModule(router: ControlCenterRouter) -> UIViewController {
     let viewModel = ControlCenterVM(router: router)
-    let view = ControlCenterView()
-    v
-    return UIHostingController(rootView: view)
+    let view = ControlCenterView(viewModel: viewModel)
+    router.baseViewController = UIHostingController(rootView: view)
+    return router.baseViewController!
   }
   
   //  MARK: - Functions
   func showUpNext() {
-    
+    if let safeBaseController = self.baseViewController {
+      let upNextModule = UpNextSongsRouter(platforms: platforms).makeModule()
+      safeBaseController.present(upNextModule, animated: true, completion: nil)
+    }
   }
   
 }

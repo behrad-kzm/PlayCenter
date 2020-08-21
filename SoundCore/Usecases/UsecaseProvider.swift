@@ -12,9 +12,11 @@ import Domain
 public final class UseCaseProvider: Domain.SoundUsecaseProvider {
 
 	private let soundManager: SoundPlayer
+  private let caches: MetaDataLoader
 //	private let queryManager: Domain.QueryManager
 	public init(/*manager: Domain.QueryManager*/) {
 		self.soundManager = SoundPlayer.shared
+    self.caches = Domain.MetaDataLoader.instance
 //		self.queryManager = manager
 	}
 	
@@ -23,7 +25,7 @@ public final class UseCaseProvider: Domain.SoundUsecaseProvider {
 //	}
 //
 	public func makeFullPlayerUsecase() -> Domain.FullPlayerUsecase {
-		return FullPlayerUsecase(manager: soundManager)
+    return FullPlayerUsecase(manager: soundManager, caches: caches)
 	}
 	
 //	public func makeRemoteUsecase() -> Domain.RemoteUsecase {

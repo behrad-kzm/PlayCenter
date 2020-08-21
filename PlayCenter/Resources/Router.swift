@@ -12,13 +12,11 @@ import Domain
 
 public class Router {
   
-  let navigationController: UINavigationController?
   var baseViewController: UIViewController?
   let platforms: Platforms
   
-  init(platforms: Platforms, navigationController: UINavigationController?) {
+  init(platforms: Platforms) {
     self.platforms = platforms
-    self.navigationController = navigationController
   }
   
   func prepareFor(error: Error){
