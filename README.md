@@ -1,2 +1,2 @@
 # PlayCenter
-Simple Music player with SwiftUI + Combine + The Clean Architecture with NO ❤️ing pods
+Simple Music player with SwiftUI + Combine + The Clean Architecture and MVVMC layer with NO ❤️ing pods
