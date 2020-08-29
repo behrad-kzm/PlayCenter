@@ -9,7 +9,7 @@
 //
 
 import SwiftUI
-
+import Domain
 struct ToolbarView: View {
   
   // MARK: -  Properties
@@ -34,26 +34,29 @@ struct ToolbarView: View {
               .aspectRatio(1.0, contentMode: .fit)
             Spacer()
             VStack(alignment: .center, spacing: 8) {
-              Rectangle()
-                .foregroundColor(Color.gray)
-                .edgesIgnoringSafeArea(.all)
-                .frame(width: 48, height: 4, alignment: .center)
-                .cornerRadius(2)
-                .padding(EdgeInsets(top: 32, leading: 0, bottom: 8, trailing: 0))
-              
+              NotchView(width: 48.0).padding(EdgeInsets(top: 32, leading: 0, bottom: 8, trailing: 0))
               HStack(alignment: .center, spacing: 8) {
                 Spacer()
                 Image("PlayPreviousButton")
                   .resizable().aspectRatio(contentMode: .fit)
                   .frame(width: proxy.size.height * 0.24, height: proxy.size.height * 0.24, alignment: .center)
+                  .onTapGesture {
+                    self.viewModel.previous()
+                }
                 Spacer()
-                Image("PlayButton")
+                self.makePlayButtonImage()
                   .resizable().aspectRatio(contentMode: .fit)
                   .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center)
+                  .onTapGesture {
+                    self.viewModel.playPause()
+                }
                 Spacer()
                 Image("PlayNextButton")
                   .resizable().aspectRatio(contentMode: .fit)
                   .frame(width: proxy.size.height * 0.24, height: proxy.size.height * 0.24, alignment: .center)
+                  .onTapGesture {
+                    self.viewModel.next()
+                }
                 Spacer()
               }.padding(.bottom, 8)
             }
@@ -61,6 +64,7 @@ struct ToolbarView: View {
           }
           HStack(alignment: .center, spacing: 0) {
             Text(self.viewModel.title)
+            .lineLimit(1)
               .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
             Spacer()
           }
@@ -70,6 +74,9 @@ struct ToolbarView: View {
     //    .sheet(isPresented: self.$showNextPage) {
     //
     //    }
+  }
+  func makePlayButtonImage() -> Image {
+    return viewModel.state == PlayerStatus.playing ? Image("PauseButton") : Image("PlayButton")
   }
 }
 

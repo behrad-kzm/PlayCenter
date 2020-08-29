@@ -13,7 +13,7 @@ extension ControlCenterView {
   func makePlayerDock() -> some View {
     
     return ControlCenterDock( isPlayingPublisher: viewModel.$state.map({ (state) -> Bool in
-    return state == .playing
+      return state == .playing
     }).eraseToAnyPublisher(), isPlaying: self.viewModel.state == .playing, previousAction: {
       self.viewModel.previous()
     }, nextAction: {
@@ -33,15 +33,16 @@ extension ControlCenterView {
   }
   func makeUpNextButton() -> some View {
     return ZStack(){
-      VStack(){
-        Image("ArrowUp")
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 8, height: 8, alignment: .center)
-        Text("UPNEXT")
-          .font(.caption)
-          .fontWeight(.bold)
-      }
+      //      VStack(){
+      //        Image("ArrowUp")
+      //          .resizable()
+      //          .aspectRatio(contentMode: .fit)
+      //          .frame(width: 8, height: 8, alignment: .center)
+      
+      Text("ShowUpNext".localize)
+        .font(.caption)
+        .fontWeight(.bold)
+      //      }
     }
   }
   
@@ -50,7 +51,7 @@ extension ControlCenterView {
     let viewModel = CircularArtworkViewModel(model: self.viewModel.artwork)
     return CircularArtworkView(viewModel: viewModel)
       .frame(width: width, height: width)
-    .padding(EdgeInsets(top: 32, leading: 0, bottom: 32, trailing: 0))
+      .padding(EdgeInsets(top: 32, leading: 0, bottom: 32, trailing: 0))
   }
   
   func makeSlider(_ proxy: GeometryProxy) -> some View {
@@ -72,9 +73,8 @@ extension ControlCenterView {
           self.sliderValue = value
         }
       }).padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
-      .accentColor(Color("PrimaryColor"))
+        .accentColor(Color("PrimaryColor"))
       
     }.frame(width: width, height: 16)
   }
 }
-

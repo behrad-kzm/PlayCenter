@@ -20,20 +20,27 @@ struct SongView: View {
   
   func makeView(_ proxy: GeometryProxy) -> some View{
     let artworkVM = CircularArtworkViewModel(model: viewModel.artwork, shadow: 4,lineWidth: 0)
-    return HStack(alignment: .center, spacing: 8) {
-      CircularArtworkView(viewModel: artworkVM)
-        .frame(width: proxy.size.height, height: proxy.size.height)
-      
-      VStack(alignment: .leading, spacing: 5) {
-        Text(viewModel.title)
-          .font(.callout)
-        if !self.hideArtistName {
-            Text(viewModel.title)
-            .font(.footnote)
-            .foregroundColor(Color.gray)
+    return ZStack(alignment: .center) {
+        Rectangle()
+          .foregroundColor(Color("SheetBackgroundColor"))
+        HStack(alignment: .center, spacing: 8) {
+        CircularArtworkView(viewModel: artworkVM)
+          .frame(width: proxy.size.height, height: proxy.size.height)
+        
+        VStack(alignment: .leading, spacing: 5) {
+          Text(viewModel.title)
+            .font(.callout)
+          if !self.hideArtistName {
+              Text(viewModel.title)
+              .font(.footnote)
+              .foregroundColor(Color.gray)
+          }
         }
-      }
-    }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .leading)
+      }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .leading)
+    }
+      
+      
+
   }
 }
 

@@ -35,7 +35,7 @@ class ToolbarViewModel: ObservableObject {
   }
   
   //MARK: - Setup
-   func setup(){
+  func setup(){
     metaDataStream
       .receive(on: RunLoop.main).compactMap { (value) in
         return value.currentModel
@@ -46,20 +46,36 @@ class ToolbarViewModel: ObservableObject {
     
     
     metaDataStream
-    .receive(on: RunLoop.main).map { (info) -> PlayerStatus in
-      return info.status
+      .receive(on: RunLoop.main).map { (info) -> PlayerStatus in
+        return info.status
     }.assign(to: \.state, on: self)
-    .store(in: &cancellableSet)
+      .store(in: &cancellableSet)
     
     metaDataStream
       .receive(on: RunLoop.main).compactMap { (value) in
-          return value.currentModel
-      }.compactMap { [caches](value) -> Data? in
-        return caches.loadArtwork(for: value)
+        return value.currentModel
+    }.compactMap { [caches](value) -> Data? in
+      return caches.loadArtwork(for: value)
     }.assign(to: \.artwork, on: self)
       .store(in: &cancellableSet)
   }
   
   //MARK: - functions
-
+  func next() {
+    useCases.next()
+  }
+  
+  func previous() {
+    useCases.previous()
+  }
+  
+  func playPause(){
+    if state == .playing {
+      useCases.pause()
+      return
+    }
+    if state == .paused {
+      useCases.resume()
+    }
+  }
 }

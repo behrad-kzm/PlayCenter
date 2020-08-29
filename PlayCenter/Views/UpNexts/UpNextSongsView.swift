@@ -16,13 +16,7 @@ struct UpNextSongsView: View {
     
     GeometryReader{ proxy in
         VStack(alignment: .center, spacing: 0) {
-          Rectangle()
-            .foregroundColor(Color.gray)
-            .edgesIgnoringSafeArea(.all)
-            .frame(width: 80, height: 4, alignment: .center)
-            .cornerRadius(2)
-            .padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
-          
+          NotchView().padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
           VStack(alignment: .leading, spacing: 16, content: {
             HStack(alignment: .center, spacing: 0) {
               Text("UpNext".localize).font(.title).fontWeight(.semibold).padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 0))

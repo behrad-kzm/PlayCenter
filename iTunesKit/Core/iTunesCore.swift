@@ -9,23 +9,26 @@
 import Foundation
 import MediaPlayer
 import Domain
-
+import Combine
 public struct iTunesCore: Domain.iTunesSongsUseCases {
-  private let library: MPMediaLibrary
+
+  private let songsSubject: CurrentValueSubject<[Playable], Never>
   public var permissionStatus: MPMediaLibraryAuthorizationStatus {
     return MPMediaLibrary.authorizationStatus()
   }
   
   public init(){
-    self.library = MPMediaLibrary.default()
-    library.beginGeneratingLibraryChangeNotifications()
-    
+//    library.beginGeneratingLibraryChangeNotifications()
+    self.songsSubject = CurrentValueSubject<[Playable], Never>(iTunesCore.loadAllSongs())
   }
   
   public func requestPermissionIfNeeded(_ handler: @escaping (MPMediaLibraryAuthorizationStatus) -> Void) {
     if permissionStatus != .authorized {
       MPMediaLibrary.requestAuthorization { (status) in
-       handler(status)
+        if status == .authorized{
+          self.songsSubject.send(iTunesCore.loadAllSongs())
+        }
+        handler(status)
       }
       return
     }
@@ -34,13 +37,19 @@ public struct iTunesCore: Domain.iTunesSongsUseCases {
   
   public func mediaPlayerChange(){}
   
-  public func loadAllSongs() -> [Playable]{
-    let songsQuery = MPMediaQuery.songs()
-    songsQuery.groupingType = .title
-    if let safeItems = songsQuery.items {
-      return safeItems.compactMap { (item) -> Playable? in
-        
-        return item.asPlayable()
+  public func loadAllSongs() -> CurrentValueSubject<[Playable], Never>{
+    return songsSubject
+  }
+  
+  static func loadAllSongs() -> [Playable]{
+    if MPMediaLibrary.authorizationStatus() == .authorized {
+      let songsQuery = MPMediaQuery.songs()
+      songsQuery.groupingType = .title
+      if let safeItems = songsQuery.items {
+        return safeItems.compactMap { (item) -> Playable? in
+          
+          return item.asPlayable()
+        }
       }
     }
     return []

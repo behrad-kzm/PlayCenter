@@ -14,16 +14,19 @@ import Domain
 
 final class UpNextSongsRouter: Router {
   
+  var hostingViewController: UIHostingController<UpNextSongsView>?
+  
   // MARK: - Initialization
-  func makeModule() -> UIViewController {
+  func makeModule() -> UIHostingController<UpNextSongsView> {
     return UpNextSongsRouter.createModule(router: self)
   }
   
-  static func createModule(router: UpNextSongsRouter) -> UIViewController {
+  static func createModule(router: UpNextSongsRouter) -> UIHostingController<UpNextSongsView> {
     let viewModel = UpNextVM(router: router)
     let view = UpNextSongsView(viewModel: viewModel)
-    router.baseViewController = UIHostingController(rootView: view)
-    return router.baseViewController!
+    router.hostingViewController = UIHostingController(rootView: view)
+    router.baseViewController = router.hostingViewController
+    return router.hostingViewController!
   }
   
   //  MARK: - Functions

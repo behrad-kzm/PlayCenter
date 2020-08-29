@@ -14,16 +14,19 @@ import SwiftUI
 
 final class ControlCenterRouter: Router {
   
+  var hostingViewController: UIHostingController<ControlCenterView>?
+  
   // MARK: - Initialization
-  func makeModule() -> UIViewController{
+  func makeModule() -> UIHostingController<ControlCenterView>{
     return ControlCenterRouter.createModule(router: self)
   }
   
-  static func createModule(router: ControlCenterRouter) -> UIViewController {
+  static func createModule(router: ControlCenterRouter) -> UIHostingController<ControlCenterView> {
     let viewModel = ControlCenterVM(router: router)
     let view = ControlCenterView(viewModel: viewModel)
-    router.baseViewController = UIHostingController(rootView: view)
-    return router.baseViewController!
+    router.hostingViewController = UIHostingController(rootView: view)
+    router.baseViewController = router.hostingViewController
+    return router.hostingViewController!
   }
   
   //  MARK: - Functions

@@ -7,6 +7,7 @@
 //
 
 import AVKit
+import Foundation
 
 public final class MetaDataLoader {
   
@@ -16,7 +17,7 @@ public final class MetaDataLoader {
   let titleCache = Cache<String, String>()
   let artistCache = Cache<String, String>()
   let albumCache = Cache<String, String>()
-  
+  let songDurationCache = Cache<String, Double>()
   
   public func loadArtwork(for playable: Playable) -> Data? {
     if let data = artworkCache[playable.uid]{
@@ -55,6 +56,16 @@ public final class MetaDataLoader {
     
     let data: String? = load(url: playable.url, forKey: "albumName")
     albumCache[playable.uid] = data
+    return data
+  }
+  
+  public func loadSongsDuration(for playable: Playable) -> TimeInterval? {
+    if let data = songDurationCache[playable.uid]{
+      return data
+    }
+    
+    let data: TimeInterval? = CMTimeGetSeconds(AVAsset(url: playable.url).duration)
+    songDurationCache[playable.uid] = data
     return data
   }
   

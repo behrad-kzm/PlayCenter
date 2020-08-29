@@ -13,4 +13,7 @@ enum DefaultText: String {
   case artistName = "Default_ArtistName"
   case albumName = "Default_AlbumName"
   
+
+  
+  case songsContainerInfo = "iTunesListInfo"
 }

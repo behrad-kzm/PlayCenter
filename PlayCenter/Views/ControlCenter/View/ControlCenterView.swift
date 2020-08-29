@@ -24,9 +24,10 @@ struct ControlCenterView: View {
   }
   
   var body: some View {
-    NavigationView{
       GeometryReader { proxy in
         VStack(alignment: .center,spacing: 8){
+          NotchView().padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
+          Spacer()
           self.makeArtwork(proxy)
           Text(self.viewModel.title)
             .font(.headline)
@@ -60,7 +61,6 @@ struct ControlCenterView: View {
           )
         }
       }.edgesIgnoringSafeArea(.bottom)
-    }
   }
   
   func showUpNextIfNeeded() {

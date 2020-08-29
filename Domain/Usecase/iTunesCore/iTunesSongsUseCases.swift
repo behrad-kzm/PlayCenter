@@ -8,9 +8,10 @@
 
 import Foundation
 import MediaPlayer
+import Combine
 
 public protocol iTunesSongsUseCases {
   var permissionStatus: MPMediaLibraryAuthorizationStatus { get }
   func requestPermissionIfNeeded(_ handler: @escaping (MPMediaLibraryAuthorizationStatus) -> Void)
-  func loadAllSongs() -> [Playable]
+  func loadAllSongs() -> CurrentValueSubject<[Playable], Never>
 }

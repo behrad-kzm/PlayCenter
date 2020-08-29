@@ -89,6 +89,9 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
   }
   
   public func setup(list: [Playable], index: Int){
+    if list.isEmpty {
+      return
+    }
     audios = list
     let safeIndex = (index >= list.count) ? (list.count - 1) : index
     current = list[safeIndex]

@@ -14,17 +14,20 @@ import SwiftUI
 
 final class iTunesSongsRouter: Router {
   
+  var hostingViewController: UIHostingController<iTunesSongsView>?
+  
   // MARK: - Initialization
   
-  func makeModule() -> UIViewController {
+  func makeModule() -> UIHostingController<iTunesSongsView> {
     return iTunesSongsRouter.createModule(router: self)
   }
   
-  static func createModule(router: iTunesSongsRouter) -> UIViewController {
+  static func createModule(router: iTunesSongsRouter) -> UIHostingController<iTunesSongsView> {
     let viewModel = iTunesSongsViewModel(router: router)
     let view = iTunesSongsView(viewModel: viewModel)
-    router.baseViewController = UIHostingController(rootView: view)
-    return router.baseViewController!
+    router.hostingViewController = UIHostingController(rootView: view)
+    router.baseViewController = router.hostingViewController
+    return router.hostingViewController!
   }
   
   //  MARK: - Functions

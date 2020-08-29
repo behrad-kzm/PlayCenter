@@ -14,17 +14,19 @@ import SwiftUI
 
 final class ToolbarRouter: Router {
   
+  var hostingViewController: UIHostingController<ToolbarView>?
   // MARK: - Initialization
   
-  func makeModule() -> UIViewController {
+  func makeModule() -> UIHostingController<ToolbarView> {
     return ToolbarRouter.createModule(router: self)
   }
   
-  static func createModule(router: ToolbarRouter) -> UIViewController {
+  static func createModule(router: ToolbarRouter) -> UIHostingController<ToolbarView> {
     let viewModel = ToolbarViewModel(router: router)
     let view = ToolbarView(viewModel: viewModel)
-    router.baseViewController = UIHostingController(rootView: view)
-    return router.baseViewController!
+    router.hostingViewController = UIHostingController(rootView: view)
+    router.baseViewController = router.hostingViewController
+    return router.hostingViewController!
   }
   
   //  MARK: - Functions

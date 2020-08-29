@@ -14,9 +14,11 @@ struct iTunesSongsView: View {
   
   // MARK: -  Properties
   @ObservedObject var viewModel: iTunesSongsViewModel
-  @State var showToolbar = true
+  
+  
   init(viewModel: iTunesSongsViewModel){
     self.viewModel = viewModel
+    
   }
   
   var body: some View {
@@ -25,21 +27,64 @@ struct iTunesSongsView: View {
         ZStack(alignment: .center) {
           self.makeList(proxy)
           self.makeToolbar(proxy)
+            .gesture(
+              DragGesture(minimumDistance: 25)
+                .onChanged({ (value) in
+                  let distance = abs(value.location.y - value.startLocation.y)
+                  if distance > 50 {
+                    self.showControlCenter()
+                  }
+                })
+          ).gesture(
+            TapGesture().onEnded({ (_) in
+              self.showControlCenter()
+            })
+          )
+          ZStack {
+            Rectangle().edgesIgnoringSafeArea(.all).foregroundColor((Color("BackgroundColor")))
+            self.makeEmptyPlaceholder()
+              .padding(.bottom, 64)
+          }.opacity(self.viewModel.items.isEmpty ? 1 : 0).onReceive(self.viewModel.$items) { (items) in
+            print(items.isEmpty)
+          }
         }
       }.navigationBarTitle(Text(self.viewModel.title), displayMode: .large)
     }
   }
+  
+  func makeEmptyPlaceholder() -> some View {
+    let router = ListPlaceholderRouter(platforms: viewModel.router.platforms)
+    let placeholder = router.makeModule(options: [.iTunes]).rootView
+    router.baseViewController = viewModel.router.baseViewController
+    return placeholder
+  }
+  func showControlCenter() {
+    if viewModel.showToolbar {
+      self.viewModel.router.showControlCenter()
+    }
+  }
+  
   func makeList(_ proxy: GeometryProxy) -> some View {
+    print("proxy is", proxy.size)
     let cellSize = CGSize(width: proxy.size.width, height: 48)
     return List {
       ForEach(viewModel.items) { songVM in
         SongView(viewModel: songVM)
           .frame(width: cellSize.width, height: cellSize.height, alignment: .leading)
+          .gesture(
+            TapGesture().onEnded({ (_) in
+              self.viewModel.clicked(on: songVM)
+            })
+        )
       }
+      Text(self.viewModel.info)
+        .font(.caption)
+        .fontWeight(.light)
+        .foregroundColor(Color.gray)
       Rectangle()
         .frame(width: proxy.size.width, height: 250, alignment: .center)
         .foregroundColor(.clear)
-      }
+    }
     .onAppear { UITableView.appearance().tableFooterView = UIView() }
     .onDisappear { UITableView.appearance().tableFooterView = nil }
   }
@@ -48,9 +93,9 @@ struct iTunesSongsView: View {
     return VStack(alignment: .center, spacing: 0) {
       Spacer()
       ToolbarView(viewModel: self.viewModel.toolbarVM)
-      .frame(width: proxy.size.width, height: 100)
-      .edgesIgnoringSafeArea(.bottom)
-      .opacity(showToolbar ? 1 : 0)
+        .frame(width: proxy.size.width, height: 100)
+        .edgesIgnoringSafeArea(.bottom)
+        .opacity(self.viewModel.showToolbar ? 1 : 0)
     }
   }
 }

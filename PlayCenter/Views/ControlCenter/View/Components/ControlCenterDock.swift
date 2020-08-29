@@ -31,16 +31,16 @@ struct ControlCenterDock: View {
         HStack(){
           Rectangle().foregroundColor(.clear).overlay(
             Image("ShuffleButton").resizable().aspectRatio(contentMode: .fit)
-              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center)
+              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).opacity(0)
           ).gesture(
             TapGesture().onEnded({ (_) in
               self.shuffleAction()
-            })
+              })
           ).padding(EdgeInsets(top: proxy.size.height * 0.33, leading: 0, bottom: 0, trailing: 0))
           self.makeDockButtons(proxy)
           Rectangle().foregroundColor(.clear).overlay(
             Image("RepeatButton").resizable().aspectRatio(contentMode: .fit)
-              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center)
+              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).opacity(0)
           ).gesture(
             TapGesture().onEnded({ (_) in
               self.repeatAction()
@@ -106,7 +106,6 @@ extension ControlCenterDock {
           .foregroundColor(.white)
           .frame(width: iconWidth, height: iconWidth, alignment: .center))
       .onReceive(isPlayingPublisher, perform: { (info) in
-        print("Salam: \(info)")
         self.isPlaying = info
           })
       .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding, trailing: 0))
