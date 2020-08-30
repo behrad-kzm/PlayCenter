@@ -74,6 +74,13 @@
 		04A4757324FBB20A007D8B13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04A4753E24FB87CC007D8B13 /* GoogleService-Info.plist */; };
 		04A4757524FBD13B007D8B13 /* CommandCenterUpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4757424FBD13B007D8B13 /* CommandCenterUpdateHandler.swift */; };
 		04A4757724FBD312007D8B13 /* CommandCenterUpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4757624FBD312007D8B13 /* CommandCenterUpdateHandler.swift */; };
+		04A475CE24FC2624007D8B13 /* RateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A475C524FC2624007D8B13 /* RateKit.framework */; };
+		04A475D524FC2624007D8B13 /* RateKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A475D424FC2624007D8B13 /* RateKitTests.swift */; };
+		04A475D724FC2624007D8B13 /* RateKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A475C724FC2624007D8B13 /* RateKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04A475DA24FC2624007D8B13 /* RateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A475C524FC2624007D8B13 /* RateKit.framework */; };
+		04A475DB24FC2624007D8B13 /* RateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04A475C524FC2624007D8B13 /* RateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04A475E424FC264A007D8B13 /* RateKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A475E324FC264A007D8B13 /* RateKit.swift */; };
+		04A475E724FC2706007D8B13 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049C865D24C2F0D600FBD291 /* Domain.framework */; };
 		04AE414324E46DCA0053642C /* UpNextSongsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE414024E46DCA0053642C /* UpNextSongsRouter.swift */; };
 		04B3F34824C02F63008568E3 /* SwiftUIBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F34724C02F63008568E3 /* SwiftUIBlur.swift */; };
 		04C4674924E7169F0063F881 /* CircularArtworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4674724E7169F0063F881 /* CircularArtworkView.swift */; };
@@ -200,6 +207,34 @@
 			remoteGlobalIDString = 049C865C24C2F0D600FBD291;
 			remoteInfo = Domain;
 		};
+		04A475CF24FC2624007D8B13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04398DBD24B7607900DA6CB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04A475C424FC2624007D8B13;
+			remoteInfo = RateKit;
+		};
+		04A475D124FC2624007D8B13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04398DBD24B7607900DA6CB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04398DC424B7607900DA6CB2;
+			remoteInfo = PlayCenter;
+		};
+		04A475D824FC2624007D8B13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04398DBD24B7607900DA6CB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04A475C424FC2624007D8B13;
+			remoteInfo = RateKit;
+		};
+		04A475E524FC2700007D8B13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04398DBD24B7607900DA6CB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 049C865C24C2F0D600FBD291;
+			remoteInfo = Domain;
+		};
 		04D34C9624EA4F68007D2E1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04398DBD24B7607900DA6CB2 /* Project object */;
@@ -232,6 +267,7 @@
 			files = (
 				049C866524C2F0D600FBD291 /* Domain.framework in Embed Frameworks */,
 				04D34CA224EA4F68007D2E1A /* iTunesKit.framework in Embed Frameworks */,
+				04A475DB24FC2624007D8B13 /* RateKit.framework in Embed Frameworks */,
 				049C865024C2F08800FBD291 /* SoundCore.framework in Embed Frameworks */,
 				04A4755B24FBA34F007D8B13 /* AppAnalytics.framework in Embed Frameworks */,
 			);
@@ -312,6 +348,13 @@
 		04A4756D24FBAAD0007D8B13 /* AnalyticsEngineSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEngineSetup.swift; sourceTree = "<group>"; };
 		04A4757424FBD13B007D8B13 /* CommandCenterUpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterUpdateHandler.swift; sourceTree = "<group>"; };
 		04A4757624FBD312007D8B13 /* CommandCenterUpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCenterUpdateHandler.swift; sourceTree = "<group>"; };
+		04A475C524FC2624007D8B13 /* RateKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04A475C724FC2624007D8B13 /* RateKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateKit.h; sourceTree = "<group>"; };
+		04A475C824FC2624007D8B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04A475CD24FC2624007D8B13 /* RateKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RateKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04A475D424FC2624007D8B13 /* RateKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateKitTests.swift; sourceTree = "<group>"; };
+		04A475D624FC2624007D8B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04A475E324FC264A007D8B13 /* RateKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateKit.swift; sourceTree = "<group>"; };
 		04AE414024E46DCA0053642C /* UpNextSongsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextSongsRouter.swift; sourceTree = "<group>"; };
 		04B3F34724C02F63008568E3 /* SwiftUIBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIBlur.swift; sourceTree = "<group>"; };
 		04C4674724E7169F0063F881 /* CircularArtworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularArtworkView.swift; sourceTree = "<group>"; };
@@ -381,6 +424,7 @@
 				049C866424C2F0D600FBD291 /* Domain.framework in Frameworks */,
 				04D34CA124EA4F68007D2E1A /* iTunesKit.framework in Frameworks */,
 				04A4755A24FBA34F007D8B13 /* AppAnalytics.framework in Frameworks */,
+				04A475DA24FC2624007D8B13 /* RateKit.framework in Frameworks */,
 				049C864F24C2F08800FBD291 /* SoundCore.framework in Frameworks */,
 				F9AFC52AD99011B50D91F677 /* Pods_PlayCenter.framework in Frameworks */,
 			);
@@ -443,6 +487,22 @@
 			files = (
 				04A4754E24FBA34F007D8B13 /* AppAnalytics.framework in Frameworks */,
 				EA9A3585D493E7B78447FF85 /* Pods_AppAnalytics_AppAnalyticsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04A475C224FC2624007D8B13 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A475E724FC2706007D8B13 /* Domain.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04A475CA24FC2624007D8B13 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A475CE24FC2624007D8B13 /* RateKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +602,8 @@
 				04D34C9A24EA4F68007D2E1A /* iTunesKitTests */,
 				04A4754624FBA34F007D8B13 /* AppAnalytics */,
 				04A4755324FBA34F007D8B13 /* AppAnalyticsTests */,
+				04A475C624FC2624007D8B13 /* RateKit */,
+				04A475D324FC2624007D8B13 /* RateKitTests */,
 				04398DC624B7607900DA6CB2 /* Products */,
 				04F64D9B24C5A069006F14BB /* Frameworks */,
 				6BBFE9B9D762B75239083A1B /* Pods */,
@@ -561,6 +623,8 @@
 				04D34C9424EA4F68007D2E1A /* iTunesKitTests.xctest */,
 				04A4754524FBA34F007D8B13 /* AppAnalytics.framework */,
 				04A4754D24FBA34F007D8B13 /* AppAnalyticsTests.xctest */,
+				04A475C524FC2624007D8B13 /* RateKit.framework */,
+				04A475CD24FC2624007D8B13 /* RateKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -870,6 +934,33 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		04A475C624FC2624007D8B13 /* RateKit */ = {
+			isa = PBXGroup;
+			children = (
+				04A475E224FC2637007D8B13 /* Core */,
+				04A475C724FC2624007D8B13 /* RateKit.h */,
+				04A475C824FC2624007D8B13 /* Info.plist */,
+			);
+			path = RateKit;
+			sourceTree = "<group>";
+		};
+		04A475D324FC2624007D8B13 /* RateKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				04A475D424FC2624007D8B13 /* RateKitTests.swift */,
+				04A475D624FC2624007D8B13 /* Info.plist */,
+			);
+			path = RateKitTests;
+			sourceTree = "<group>";
+		};
+		04A475E224FC2637007D8B13 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				04A475E324FC264A007D8B13 /* RateKit.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		04B3F34524C02F41008568E3 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1169,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04A475C024FC2624007D8B13 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A475D724FC2624007D8B13 /* RateKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04D34C8724EA4F68007D2E1A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1107,6 +1206,7 @@
 				049C866324C2F0D600FBD291 /* PBXTargetDependency */,
 				04D34CA024EA4F68007D2E1A /* PBXTargetDependency */,
 				04A4755924FBA34F007D8B13 /* PBXTargetDependency */,
+				04A475D924FC2624007D8B13 /* PBXTargetDependency */,
 			);
 			name = PlayCenter;
 			productName = PlayCenter;
@@ -1252,6 +1352,44 @@
 			productReference = 04A4754D24FBA34F007D8B13 /* AppAnalyticsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		04A475C424FC2624007D8B13 /* RateKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04A475E024FC2624007D8B13 /* Build configuration list for PBXNativeTarget "RateKit" */;
+			buildPhases = (
+				04A475C024FC2624007D8B13 /* Headers */,
+				04A475C124FC2624007D8B13 /* Sources */,
+				04A475C224FC2624007D8B13 /* Frameworks */,
+				04A475C324FC2624007D8B13 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04A475E624FC2700007D8B13 /* PBXTargetDependency */,
+			);
+			name = RateKit;
+			productName = RateKit;
+			productReference = 04A475C524FC2624007D8B13 /* RateKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		04A475CC24FC2624007D8B13 /* RateKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04A475E124FC2624007D8B13 /* Build configuration list for PBXNativeTarget "RateKitTests" */;
+			buildPhases = (
+				04A475C924FC2624007D8B13 /* Sources */,
+				04A475CA24FC2624007D8B13 /* Frameworks */,
+				04A475CB24FC2624007D8B13 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04A475D024FC2624007D8B13 /* PBXTargetDependency */,
+				04A475D224FC2624007D8B13 /* PBXTargetDependency */,
+			);
+			name = RateKitTests;
+			productName = RateKitTests;
+			productReference = 04A475CD24FC2624007D8B13 /* RateKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		04D34C8B24EA4F68007D2E1A /* iTunesKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04D34CA324EA4F69007D2E1A /* Build configuration list for PBXNativeTarget "iTunesKit" */;
@@ -1333,6 +1471,14 @@
 						CreatedOnToolsVersion = 11.6;
 						TestTargetID = 04398DC424B7607900DA6CB2;
 					};
+					04A475C424FC2624007D8B13 = {
+						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1160;
+					};
+					04A475CC24FC2624007D8B13 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 04398DC424B7607900DA6CB2;
+					};
 					04D34C8B24EA4F68007D2E1A = {
 						CreatedOnToolsVersion = 11.5;
 						LastSwiftMigration = 1150;
@@ -1366,6 +1512,8 @@
 				04D34C9324EA4F68007D2E1A /* iTunesKitTests */,
 				04A4754424FBA34F007D8B13 /* AppAnalytics */,
 				04A4754C24FBA34F007D8B13 /* AppAnalyticsTests */,
+				04A475C424FC2624007D8B13 /* RateKit */,
+				04A475CC24FC2624007D8B13 /* RateKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1427,6 +1575,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		04A4754B24FBA34F007D8B13 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04A475C324FC2624007D8B13 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04A475CB24FC2624007D8B13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1850,6 +2012,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04A475C124FC2624007D8B13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A475E424FC264A007D8B13 /* RateKit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04A475C924FC2624007D8B13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04A475D524FC2624007D8B13 /* RateKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04D34C8824EA4F68007D2E1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1930,6 +2108,26 @@
 			isa = PBXTargetDependency;
 			target = 049C865C24C2F0D600FBD291 /* Domain */;
 			targetProxy = 04A4756524FBA89D007D8B13 /* PBXContainerItemProxy */;
+		};
+		04A475D024FC2624007D8B13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04A475C424FC2624007D8B13 /* RateKit */;
+			targetProxy = 04A475CF24FC2624007D8B13 /* PBXContainerItemProxy */;
+		};
+		04A475D224FC2624007D8B13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04398DC424B7607900DA6CB2 /* PlayCenter */;
+			targetProxy = 04A475D124FC2624007D8B13 /* PBXContainerItemProxy */;
+		};
+		04A475D924FC2624007D8B13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04A475C424FC2624007D8B13 /* RateKit */;
+			targetProxy = 04A475D824FC2624007D8B13 /* PBXContainerItemProxy */;
+		};
+		04A475E624FC2700007D8B13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 049C865C24C2F0D600FBD291 /* Domain */;
+			targetProxy = 04A475E524FC2700007D8B13 /* PBXContainerItemProxy */;
 		};
 		04D34C9724EA4F68007D2E1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2485,6 +2683,109 @@
 			};
 			name = Release;
 		};
+		04A475DC24FC2624007D8B13 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = K223L6XL4B;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RateKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bekapps.RateKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		04A475DD24FC2624007D8B13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = K223L6XL4B;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RateKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bekapps.RateKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		04A475DE24FC2624007D8B13 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32SKEMQWAM;
+				INFOPLIST_FILE = RateKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bekapps.RateKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlayCenter.app/PlayCenter";
+			};
+			name = Debug;
+		};
+		04A475DF24FC2624007D8B13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32SKEMQWAM;
+				INFOPLIST_FILE = RateKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bekapps.RateKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlayCenter.app/PlayCenter";
+			};
+			name = Release;
+		};
 		04D34CA424EA4F69007D2E1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9972BD202CFE35A61FE06FC /* Pods-iTunesKit.debug.xcconfig */;
@@ -2666,6 +2967,24 @@
 			buildConfigurations = (
 				04A4755E24FBA34F007D8B13 /* Debug */,
 				04A4755F24FBA34F007D8B13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04A475E024FC2624007D8B13 /* Build configuration list for PBXNativeTarget "RateKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04A475DC24FC2624007D8B13 /* Debug */,
+				04A475DD24FC2624007D8B13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04A475E124FC2624007D8B13 /* Build configuration list for PBXNativeTarget "RateKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04A475DE24FC2624007D8B13 /* Debug */,
+				04A475DF24FC2624007D8B13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

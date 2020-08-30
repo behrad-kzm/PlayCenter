@@ -12,6 +12,8 @@ import Domain
 import SoundCore
 import iTunesKit
 import AppAnalytics
+import RateKit
+
 struct Application {
   
   static var shared = Application()
@@ -29,7 +31,7 @@ struct Application {
     tabBarController.viewControllers = [rootVC]
     tabBarController.selectedIndex = 1
 //
-
+    RateKit.instance.requestReviewIfNeeded()
     window.subviews.first?.removeFromSuperview()
     window.rootViewController = rootVC
     window.makeKeyAndVisible()
