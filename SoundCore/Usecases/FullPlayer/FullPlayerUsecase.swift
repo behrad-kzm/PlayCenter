@@ -98,4 +98,7 @@ public final class FullPlayerUsecase: Domain.FullPlayerUsecase {
   public func setUpNext(list: [Playable]) {
     manager.setUpNext(list: list)
   }
+  public func setCommandControlUpdateHandler(object: Domain.CommandCenterUpdateHandler){
+    manager.updateControlCneterDelegate = object
+  }
 }

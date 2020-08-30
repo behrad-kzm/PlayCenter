@@ -12,5 +12,6 @@ import Domain
 struct Platforms {
   let soundCore: Domain.SoundUsecaseProvider
   let iTunesKit: Domain.iTunesSongsUseCases
+  let analyticsCore: Domain.AnalyticsUseCaseProvider
   let caches: Domain.MetaDataLoader
 }

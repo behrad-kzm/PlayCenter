@@ -16,7 +16,7 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
   private var audioPlayer = AVAudioPlayer()
   private let audioSession = AVAudioSession()
   private let remoteHandlers = RemoteControllersHandler()
-  
+  public var updateControlCneterDelegate: Domain.CommandCenterUpdateHandler?
   var repeatType = MPRepeatType.off
   var shuffled: Bool! {
     didSet {
@@ -109,6 +109,7 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
       next()
       print("Player Error!")
     }
+    updateControlCneterDelegate?.updateInfoCenter(withModel: current, currentTime: audioPlayer.currentTime)
   }
   
   func pause(){
