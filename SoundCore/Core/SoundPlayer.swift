@@ -115,6 +115,7 @@ public class SoundPlayer: NSObject, AVAudioPlayerDelegate {
   func pause(){
     audioPlayer.pause()
     status = .paused
+    updateControlCneterDelegate?.updateInfoCenter(withModel: current, currentTime: audioPlayer.currentTime)
   }
   
   func resume(){

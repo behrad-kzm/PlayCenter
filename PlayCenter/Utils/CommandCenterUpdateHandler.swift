@@ -28,6 +28,7 @@ public struct CommandCenterUpdateHandler: Domain.CommandCenterUpdateHandler {
             return albumArt
         })
     }
+    
     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
   }
   
