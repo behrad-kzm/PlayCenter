@@ -25,6 +25,9 @@ DerivedData/
 ## Obj-C/Swift specific
 *.hmap
 
+#GoogleServices
+PlayCenter/GoogleService-Info.plist
+
 # Cocoapods
 Pods/
 
