@@ -42,7 +42,7 @@ class iTunesSongsViewModel: ObservableObject {
       }
     }).assign(to: \.items, on: self)
       .store(in: &cancellableSet)
-      
+    
     
     $items.map { [caches](values) -> String in
       let duration = values.compactMap({ (song) -> TimeInterval? in
@@ -65,7 +65,7 @@ class iTunesSongsViewModel: ObservableObject {
         info.status == .playing || info.status == .paused
       }).removeDuplicates()
       .assign(to: \.showToolbar, on: self)
-    .store(in: &cancellableSet)
+      .store(in: &cancellableSet)
   }
   
   //MARK: - functions

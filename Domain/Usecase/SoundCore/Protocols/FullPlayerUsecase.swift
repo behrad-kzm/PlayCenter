@@ -23,4 +23,5 @@ public protocol FullPlayerUsecase {
 	func setSuffle(isSheffled: Bool)
 	func setRepeat(mode: MPRepeatType)
   func setUpNext(list: [Playable])
+  func setCommandControlUpdateHandler(object: Domain.CommandCenterUpdateHandler)
 }
