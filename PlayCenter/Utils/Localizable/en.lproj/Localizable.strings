@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  PlayCenter
+
+  Created by Behrad Kazemi on 7/15/20.
+  Copyright © 2020 Behrad Kazemi. All rights reserved.
+*/
+
+"Default_SongTitle" = "Untitled Song";
+"Default_ArtworkPlaceholder" = "ArtworkPlaceholder";
+"Default_ArtistName" = "Unknown Artist";
+"Default_AlbumName" = "Untitled Album";
+
+"unknown" = "unknown";
+"seconds" = "seconds";
+"minutes" = "minutes";
+"hours" = "hours";
+"days" = "days";
+
+"UpNext" = "Up Next";
+"ShowUpNext" = "CLICK TO SHOW UPNEXT";
+"RecentyAdded" = "Library";
+"iTunesListInfo" = "There are {1} songs that takes {2} to listen.";
+
+"iTunesPermissionTitle" = "\"PlayCenter\" would like to access Apple Music and your media library";
+"iTunesPermissionDescription" = "Click on the 'Open Settings' then turn on the 'Media & Apple Music' access.";
+"OpenSettings" = "Open Settings";
+"Cancel" = "Cancel";
+//"Default_ArtistName" = "";
