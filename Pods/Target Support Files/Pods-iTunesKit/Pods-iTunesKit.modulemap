@@ -1,6 +1,0 @@
-framework module Pods_iTunesKit {
-  umbrella header "Pods-iTunesKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

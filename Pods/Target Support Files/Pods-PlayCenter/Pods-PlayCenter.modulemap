@@ -1,6 +1,0 @@
-framework module Pods_PlayCenter {
-  umbrella header "Pods-PlayCenter-umbrella.h"
-
-  export *
-  module * { export * }
-}
