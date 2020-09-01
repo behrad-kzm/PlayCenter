@@ -25,14 +25,14 @@ public struct RateKit {
     self.minimumDaysForPrompt = UserDefaults.standard.integer(forKey: StorageKeys.minimumDaysForPromptKey.rawValue)
     
     if let firstInstallDateString = UserDefaults.standard.string(forKey: StorageKeys.firstInstallDateKey.rawValue),
-      let firstInstallDate = DateFormatter().date(from: firstInstallDateString){
+      let firstInstallDate = DateFormatter.custom.date(from: firstInstallDateString){
       self.currentScoreForRatingPrompt += Int(firstInstallDate.days / Double(minimumDaysForPrompt) * 100)
       return
     }
 
     UserDefaults.standard.set(100, forKey: StorageKeys.userMinimumScoreKey.rawValue)
-    UserDefaults.standard.set(0, forKey: StorageKeys.userCurrentScoreKey.rawValue)
-    UserDefaults.standard.set(DateFormatter().string(from: Date()), forKey: StorageKeys.firstInstallDateKey.rawValue)
+    UserDefaults.standard.set(3, forKey: StorageKeys.minimumDaysForPromptKey.rawValue)
+    UserDefaults.standard.set(DateFormatter.custom.string(from: Date()), forKey: StorageKeys.firstInstallDateKey.rawValue)
   }
   
   public mutating func increaseRatingScore(_ value: Int){
