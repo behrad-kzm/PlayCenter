@@ -42,6 +42,7 @@ extension ControlCenterView {
       Text("ShowUpNext".localize)
         .font(.caption)
         .fontWeight(.bold)
+        .foregroundColor(Color("‌ButtonColor"))
       //      }
     }
   }

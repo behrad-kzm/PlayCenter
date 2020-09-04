@@ -19,10 +19,10 @@ struct SongView: View {
   }
   
   func makeView(_ proxy: GeometryProxy) -> some View{
-    let artworkVM = CircularArtworkViewModel(model: viewModel.artwork, shadow: 4,lineWidth: 0)
+    let artworkVM = CircularArtworkViewModel(model: viewModel.artwork, shadow: 4,lineWidth: 0.5)
     return ZStack(alignment: .center) {
         Rectangle()
-          .foregroundColor(Color("SheetBackgroundColor"))
+          .foregroundColor(Color("BackgroundColor"))
         HStack(alignment: .center, spacing: 8) {
         CircularArtworkView(viewModel: artworkVM)
           .frame(width: proxy.size.height, height: proxy.size.height)

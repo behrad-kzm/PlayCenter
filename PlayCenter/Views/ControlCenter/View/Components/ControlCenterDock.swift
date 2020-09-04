@@ -30,8 +30,8 @@ struct ControlCenterDock: View {
           .shadow(color: Color("MainShadow"), radius: 16, x: 0, y: 20)
         HStack(){
           Rectangle().foregroundColor(.clear).overlay(
-            Image("ShuffleButton").resizable().aspectRatio(contentMode: .fit)
-              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).opacity(0)
+            Image("ShuffleButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit)
+              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).accentColor(Color("‌ButtonColor")).opacity(0)
           ).gesture(
             TapGesture().onEnded({ (_) in
               self.shuffleAction()
@@ -39,7 +39,7 @@ struct ControlCenterDock: View {
           ).padding(EdgeInsets(top: proxy.size.height * 0.33, leading: 0, bottom: 0, trailing: 0))
           self.makeDockButtons(proxy)
           Rectangle().foregroundColor(.clear).overlay(
-            Image("RepeatButton").resizable().aspectRatio(contentMode: .fit)
+            Image("RepeatButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit).accentColor(Color("‌ButtonColor"))
               .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).opacity(0)
           ).gesture(
             TapGesture().onEnded({ (_) in
@@ -61,7 +61,8 @@ extension ControlCenterDock {
     return HStack(alignment: .center, spacing: 16){
       
       Rectangle().foregroundColor(.clear).overlay(
-        Image("PlayPreviousButton").resizable().aspectRatio(contentMode: .fit)
+        Image("PlayPreviousButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit)
+        .accentColor(Color("‌ButtonColor"))
           .frame(width: proxy.size.height * ratio, height: proxy.size.height * ratio, alignment: .center)
       ).gesture(
         TapGesture().onEnded({ (_) in
@@ -70,7 +71,8 @@ extension ControlCenterDock {
       )
       Spacer()
       Rectangle().foregroundColor(.clear).overlay(
-        Image("PlayNextButton").resizable().aspectRatio(contentMode: .fit)
+        Image("PlayNextButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit)
+          .accentColor(Color("‌ButtonColor"))
           .frame(width: proxy.size.height * ratio, height: proxy.size.height * ratio, alignment: .center)
       ).gesture(
         TapGesture().onEnded({ (_) in

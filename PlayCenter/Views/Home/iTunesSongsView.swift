@@ -76,7 +76,8 @@ struct iTunesSongsView: View {
               self.viewModel.clicked(on: songVM)
             })
         )
-      }
+      }.listRowBackground(Color("BackgroundColor"))
+
       Text(self.viewModel.info)
         .font(.caption)
         .fontWeight(.light)
@@ -84,7 +85,7 @@ struct iTunesSongsView: View {
       Rectangle()
         .frame(width: proxy.size.width, height: 250, alignment: .center)
         .foregroundColor(.clear)
-    }
+      }
     .onAppear { UITableView.appearance().tableFooterView = UIView() }
     .onDisappear { UITableView.appearance().tableFooterView = nil }
   }
@@ -103,5 +104,6 @@ struct iTunesSongsView: View {
 struct iTunesSongsView_Previews: PreviewProvider {
   static var previews: some View {
     iTunesSongsView(viewModel: iTunesSongsViewModel(router: iTunesSongsRouter(platforms: Application.shared.package)))
+      
   }
 }

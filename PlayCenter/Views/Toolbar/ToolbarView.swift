@@ -29,7 +29,7 @@ struct ToolbarView: View {
           .shadow(radius: 16)
         VStack(alignment: .center, spacing: 8) {
           HStack(alignment: .center, spacing: 4) {
-            CircularArtworkView(viewModel: CircularArtworkViewModel(model: self.viewModel.artwork, hasShadow: false))
+            CircularArtworkView(viewModel: CircularArtworkViewModel(model: self.viewModel.artwork, lineWidth: 2, hasShadow: false))
               .padding(.leading, 24.0)
               .aspectRatio(1.0, contentMode: .fit)
             Spacer()
@@ -38,21 +38,27 @@ struct ToolbarView: View {
               HStack(alignment: .center, spacing: 8) {
                 Spacer()
                 Image("PlayPreviousButton")
+                  .renderingMode(.template)
                   .resizable().aspectRatio(contentMode: .fit)
+                  .accentColor(Color("‌ButtonColor"))
                   .frame(width: proxy.size.height * 0.24, height: proxy.size.height * 0.24, alignment: .center)
                   .onTapGesture {
                     self.viewModel.previous()
                 }
                 Spacer()
                 self.makePlayButtonImage()
+                  .renderingMode(.template)
                   .resizable().aspectRatio(contentMode: .fit)
+                  .accentColor(Color("‌ButtonColor"))
                   .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center)
                   .onTapGesture {
                     self.viewModel.playPause()
                 }
                 Spacer()
                 Image("PlayNextButton")
+                  .renderingMode(.template)
                   .resizable().aspectRatio(contentMode: .fit)
+                  .accentColor(Color("‌ButtonColor"))
                   .frame(width: proxy.size.height * 0.24, height: proxy.size.height * 0.24, alignment: .center)
                   .onTapGesture {
                     self.viewModel.next()

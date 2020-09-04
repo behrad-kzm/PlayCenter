@@ -39,7 +39,7 @@ struct ControlCenterView: View {
             .frame(width: proxy.size.width, height: 100, alignment: .center)
           Spacer()
           ZStack(){
-            Rectangle().foregroundColor(.white)
+            Rectangle().foregroundColor(Color("BackgroundColor"))
             self.makeUpNextButton().padding(.bottom)
           }
           .frame( maxHeight: proxy.size.height * 0.13)
@@ -59,7 +59,7 @@ struct ControlCenterView: View {
                 self.showUpNextIfNeeded()
               })
           )
-        }
+        }.background(Color("BackgroundColor"))
       }.edgesIgnoringSafeArea(.bottom)
   }
   

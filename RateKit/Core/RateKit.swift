@@ -35,13 +35,13 @@ public struct RateKit {
     UserDefaults.standard.set(DateFormatter.custom.string(from: Date()), forKey: StorageKeys.firstInstallDateKey.rawValue)
   }
   
-  public mutating func increaseRatingScore(_ value: Int){
+  public mutating func increaseRatingScore(_ value: Int) {
     let newValue = UserDefaults.standard.integer(forKey: StorageKeys.userCurrentScoreKey.rawValue) + value
     UserDefaults.standard.set(newValue, forKey: StorageKeys.userCurrentScoreKey.rawValue)
     self.currentScoreForRatingPrompt += value
   }
   
-  public mutating func decreaseRatingScore(_ value: Int){
+  public mutating func decreaseRatingScore(_ value: Int) {
     let newValue = UserDefaults.standard.integer(forKey: StorageKeys.userCurrentScoreKey.rawValue) - value
     UserDefaults.standard.set(newValue, forKey: StorageKeys.userCurrentScoreKey.rawValue)
     self.currentScoreForRatingPrompt -= value
