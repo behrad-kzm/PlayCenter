@@ -31,7 +31,7 @@ struct Application {
     tabBarController.viewControllers = [rootVC]
     tabBarController.selectedIndex = 1
 //
-    RateKit.instance.requestReviewIfNeeded()
+//    RateKit.instance.requestReviewIfNeeded()
     window.subviews.first?.removeFromSuperview()
     window.rootViewController = rootVC
     window.makeKeyAndVisible()
