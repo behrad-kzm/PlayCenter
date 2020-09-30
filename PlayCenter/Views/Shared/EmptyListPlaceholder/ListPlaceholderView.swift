@@ -34,7 +34,7 @@ struct ListPlaceholderView: View {
             .font(.headline)
           self.makeOptionsView(proxy)
         }
-      }
+      }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
     }
   }
   
@@ -58,6 +58,8 @@ struct ListPlaceholderView: View {
 
 struct ListPlaceholderView_Previews: PreviewProvider {
   static var previews: some View {
-    ListPlaceholderView(viewModel: ListPlaceholderViewModel(router: ListPlaceholderRouter(platforms: Application.shared.package), types: [.iTunes]))
+      ListPlaceholderView(viewModel: ListPlaceholderViewModel(router: ListPlaceholderRouter(platforms: Application.shared.package), types: [.iTunes]))
+        .previewLayout(.sizeThatFits)
+        .frame(width: 320, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
   }
 }

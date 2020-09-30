@@ -14,7 +14,7 @@ struct ToolbarView: View {
   
   // MARK: -  Properties
   @ObservedObject var viewModel: ToolbarViewModel
-  
+  @Namespace var nspace
   
   init(viewModel: ToolbarViewModel){
     self.viewModel = viewModel

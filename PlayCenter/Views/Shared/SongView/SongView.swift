@@ -38,9 +38,6 @@ struct SongView: View {
         }
       }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .leading)
     }
-      
-      
-
   }
 }
 

@@ -38,5 +38,8 @@ final class iTunesSongsRouter: Router {
     }
   }
   
+  func getFindMenu() -> FindView {
+    FindRouter(platforms: platforms).makeModule().rootView
+  }
 }
 

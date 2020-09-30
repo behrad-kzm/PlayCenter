@@ -12,6 +12,7 @@ import Combine
 struct UpNextSongsView: View {
   
   @ObservedObject var viewModel: UpNextVM
+  
   var body: some View {
     
     GeometryReader{ proxy in

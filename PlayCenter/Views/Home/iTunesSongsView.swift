@@ -14,41 +14,84 @@ struct iTunesSongsView: View {
   
   // MARK: -  Properties
   @ObservedObject var viewModel: iTunesSongsViewModel
-  
-  
+  @State var showSearchView = false
+  @State var currentIndex: Int = 0
+  @State var sideMenuOffset: CGFloat = 0
+  @GestureState private var translation: CGFloat = 0
   init(viewModel: iTunesSongsViewModel){
     self.viewModel = viewModel
     
   }
   
   var body: some View {
-    NavigationView{
-      GeometryReader { proxy in
-        ZStack(alignment: .center) {
-          self.makeList(proxy)
-          self.makeToolbar(proxy)
-            .gesture(
-              DragGesture(minimumDistance: 25)
-                .onChanged({ (value) in
-                  let distance = abs(value.location.y - value.startLocation.y)
-                  if distance > 50 {
-                    self.showControlCenter()
+    GeometryReader { mainProxy in
+      ZStack(alignment: .leading, content: {
+        GeometryReader { zStackProxy in
+            HStack(alignment: .center) {
+              GeometryReader { proxy in
+                ZStack(alignment: .center) {
+                  self.makeList(proxy)
+                    .opacity(self.viewModel.items.isEmpty ? 0 : 1)
+                  
+                  self.makeToolbar(mainProxy)
+                    .gesture(
+                      DragGesture(minimumDistance: 25)
+                        .onChanged({ (value) in
+                          let distance = abs(value.location.y - value.startLocation.y)
+                          if distance > 50 {
+                            self.showControlCenter()
+                          }
+                        })
+                    ).gesture(
+                      TapGesture().onEnded({ (_) in
+                        self.showControlCenter()
+                      })
+                    )
+                  ZStack(alignment: .center) {
+                    Rectangle()
+                      .edgesIgnoringSafeArea(.all)
+                      .background(Color("BackgroundColor"))
+                      .foregroundColor(Color("BackgroundColor"))
+                    
+                    self.makeEmptyPlaceholder()
+                      .padding(.bottom, 64)
+                    
+                  }.opacity(self.viewModel.items.isEmpty ? 1 : 0).onReceive(self.viewModel.$items) { (items) in
+                    print(items.isEmpty)
                   }
-                })
-          ).gesture(
-            TapGesture().onEnded({ (_) in
-              self.showControlCenter()
-            })
-          )
-          ZStack {
-            Rectangle().edgesIgnoringSafeArea(.all).foregroundColor((Color("BackgroundColor")))
-            self.makeEmptyPlaceholder()
-              .padding(.bottom, 64)
-          }.opacity(self.viewModel.items.isEmpty ? 1 : 0).onReceive(self.viewModel.$items) { (items) in
-            print(items.isEmpty)
-          }
+                  Rectangle().foregroundColor(
+                    Color.black
+                  )
+                  .opacity(currentIndex == 0 ? Double(Calculations.progress(byValue: -self.translation, fromMainValue: mainProxy.size.width, maximum: 0.3)) : 0.3)
+                  .animation(.interactiveSpring()).edgesIgnoringSafeArea(.all)
+                }.blur(radius: showSearchView ? 15 : 0)
+                .frame(width: zStackProxy.size.width, alignment: .center)
+                
+              }
+              .offset(x: -self.translation)
+              .offset(x: CGFloat(self.currentIndex) * zStackProxy.size.width)
+              .blur(radius: Calculations.progress(byValue: -self.translation, fromMainValue: zStackProxy.size.width, maximum: 15))
+              .blur(radius: currentIndex == 0 ? 0.0 : 15)
+              .animation(.interactiveSpring())
+              .edgesIgnoringSafeArea(.all)
+              
+              viewModel.router.getFindMenu().frame(width: zStackProxy.size.width, height: zStackProxy.size.height, alignment: .center)
+            
+          }.frame(width: zStackProxy.size.width * 2, height: zStackProxy.size.height, alignment: .center)
+            .offset(x: -CGFloat(self.currentIndex) * zStackProxy.size.width)
+            .offset(x: self.translation)
+            .animation(.interactiveSpring())
+            .gesture(
+              DragGesture().updating(self.$translation) { value, state, _ in
+                state = value.translation.width
+              }.onEnded { value in
+                let offset = value.translation.width / (zStackProxy.size.width * 0.9)
+                let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
+                currentIndex = min(max(Int(newIndex), 0), 1)
+              }
+            )
         }
-      }.navigationBarTitle(Text(self.viewModel.title), displayMode: .large)
+      })
     }
   }
   
@@ -56,8 +99,10 @@ struct iTunesSongsView: View {
     let router = ListPlaceholderRouter(platforms: viewModel.router.platforms)
     let placeholder = router.makeModule(options: [.iTunes]).rootView
     router.baseViewController = viewModel.router.baseViewController
+    
     return placeholder
   }
+  
   func showControlCenter() {
     if viewModel.showToolbar {
       self.viewModel.router.showControlCenter()
@@ -65,29 +110,41 @@ struct iTunesSongsView: View {
   }
   
   func makeList(_ proxy: GeometryProxy) -> some View {
-    print("proxy is", proxy.size)
-    let cellSize = CGSize(width: proxy.size.width, height: 48)
-    return List {
-      ForEach(viewModel.items) { songVM in
-        SongView(viewModel: songVM)
-          .frame(width: cellSize.width, height: cellSize.height, alignment: .leading)
-          .gesture(
-            TapGesture().onEnded({ (_) in
-              self.viewModel.clicked(on: songVM)
-            })
-        )
-      }.listRowBackground(Color("BackgroundColor"))
-
-      Text(self.viewModel.info)
-        .font(.caption)
-        .fontWeight(.light)
-        .foregroundColor(Color.gray)
-      Rectangle()
-        .frame(width: proxy.size.width, height: 250, alignment: .center)
-        .foregroundColor(.clear)
-      }
-    .onAppear { UITableView.appearance().tableFooterView = UIView() }
-    .onDisappear { UITableView.appearance().tableFooterView = nil }
+    return ScrollView(.vertical, showsIndicators: false, content: {
+      VStack(alignment: .leading, content: {
+        Rectangle()
+          .frame(width: proxy.size.width, height: 34, alignment: .center)
+          .foregroundColor(.clear)
+        Text("RecentyAdded".localize)
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .multilineTextAlignment(.leading)
+          .padding(.top, 32.0)
+          .padding(.bottom, 8.0)
+          .padding(.leading, 16)
+        
+        ForEach(viewModel.items) { songVM in
+          SongView(viewModel: songVM)
+            .frame(height: 56, alignment: .leading)
+            .gesture(
+              TapGesture().onEnded({ (_) in
+                self.viewModel.clicked(on: songVM)
+              })
+            )
+            .padding(.horizontal, 16)
+            .padding(.vertical, 4)
+        }
+        
+        Text(self.viewModel.info)
+          .font(.caption)
+          .fontWeight(.light)
+          .foregroundColor(Color.gray)
+          .padding(.leading, 16)
+        Rectangle()
+          .frame(width: proxy.size.width, height: 250, alignment: .center)
+          .foregroundColor(.clear)
+      })
+    })
   }
   
   func makeToolbar(_ proxy: GeometryProxy) -> some View {
@@ -95,8 +152,8 @@ struct iTunesSongsView: View {
       Spacer()
       ToolbarView(viewModel: self.viewModel.toolbarVM)
         .frame(width: proxy.size.width, height: 100)
-        .edgesIgnoringSafeArea(.bottom)
         .opacity(self.viewModel.showToolbar ? 1 : 0)
+        .offset(y: -proxy.safeAreaInsets.bottom)
     }
   }
 }
@@ -104,6 +161,6 @@ struct iTunesSongsView: View {
 struct iTunesSongsView_Previews: PreviewProvider {
   static var previews: some View {
     iTunesSongsView(viewModel: iTunesSongsViewModel(router: iTunesSongsRouter(platforms: Application.shared.package)))
-      
+    
   }
 }

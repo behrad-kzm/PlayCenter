@@ -12,6 +12,7 @@ struct ControlCenterView: View {
   
   //MARK: - Properties
   @ObservedObject var viewModel: ControlCenterVM
+  @Namespace var nspace
   @State var sliderValue: Double = 0.0
   @State var showUpNext = false
   @State var sliderIsSeeking = false

@@ -18,6 +18,7 @@
 "days" = "days";
 
 "UpNext" = "Up Next";
+"SearchPlaceholder" = "Search...";
 "ShowUpNext" = "CLICK TO SHOW UPNEXT";
 "RecentyAdded" = "Library";
 "iTunesListInfo" = "There are {1} songs that takes {2} to listen.";
@@ -26,4 +27,6 @@
 "iTunesPermissionDescription" = "Click on the 'Open Settings' then turn on the 'Media & Apple Music' access.";
 "OpenSettings" = "Open Settings";
 "Cancel" = "Cancel";
+"Find" = "Searching";
+"CollectionPlaceholder" = "Suggestions";
 //"Default_ArtistName" = "";

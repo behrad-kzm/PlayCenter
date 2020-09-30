@@ -40,6 +40,17 @@ class ControlCenterVM: ObservableObject {
   
   //MARK: - Setup
    func setup(){
+    
+    metaDataStream.receive(on: RunLoop.main).map { (info) -> Bool in
+      return info.isShuffle
+    }.assign(to: \.isShuffle, on: self)
+      .store(in: &cancellableSet)
+    
+    metaDataStream.receive(on: RunLoop.main).map { (info) -> Bool in
+      return info.repeatMode == .off ? false : true
+    }.assign(to: \.isRepeat, on: self)
+      .store(in: &cancellableSet)
+    
      metaDataStream
        .receive(on: RunLoop.main).map { (info) -> PlayerStatus in
          return info.status
@@ -123,4 +134,13 @@ class ControlCenterVM: ObservableObject {
     useCase.seekTo(destination: time)
   }
   
+  func repeatToggle(){
+    isRepeat.toggle()
+    useCase.setRepeat(mode: isRepeat ? .one : .off)
+  }
+  
+  func shuffleToggle(){
+    isShuffle.toggle()
+    useCase.setSuffle(isSheffled: isShuffle)
+  }
 }

@@ -11,39 +11,16 @@ import SwiftUI
 //MARK: - Make Views
 extension ControlCenterView {
   func makePlayerDock() -> some View {
-    
-    return ControlCenterDock( isPlayingPublisher: viewModel.$state.map({ (state) -> Bool in
+   return ControlCenterDock(isPlayingPublisher: viewModel.$state.map({ (state) -> Bool in
       return state == .playing
-    }).eraseToAnyPublisher(), isPlaying: self.viewModel.state == .playing, previousAction: {
-      self.viewModel.previous()
-    }, nextAction: {
-      self.viewModel.next()
-    }, playPauseAction: { (shouldPlay) in
-      if shouldPlay {
-        self.viewModel.play()
-        return
-      }
-      self.viewModel.pause()
-    }, shuffleAction: {
-      //      self.vi
-    }, repeatAction: {
-      print("Repeat")
-    })
-    
+    }).eraseToAnyPublisher(), isPlaying: self.viewModel.state == .playing, viewModel: self.viewModel)
   }
   func makeUpNextButton() -> some View {
     return ZStack(){
-      //      VStack(){
-      //        Image("ArrowUp")
-      //          .resizable()
-      //          .aspectRatio(contentMode: .fit)
-      //          .frame(width: 8, height: 8, alignment: .center)
-      
       Text("ShowUpNext".localize)
         .font(.caption)
         .fontWeight(.bold)
         .foregroundColor(Color("‌ButtonColor"))
-      //      }
     }
   }
   

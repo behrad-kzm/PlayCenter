@@ -12,15 +12,25 @@ import Combine
 
 struct ControlCenterDock: View {
   var isPlayingPublisher: AnyPublisher<Bool, Never>
-   @State private(set) var isPlaying: Bool = false
+  @State private(set) var isPlaying: Bool = false
+  @State private(set) var shuffleButtonColor: Color = Color("‌ButtonColor")
+  var viewModel: ControlCenterVM
+  private var cancellableSet: Set<AnyCancellable> = []
+  
+  public init(isPlayingPublisher: AnyPublisher<Bool, Never>, isPlaying: Bool = false, viewModel: ControlCenterVM){
+    
+    self.isPlayingPublisher = isPlayingPublisher
+    self.viewModel = viewModel
+    self.isPlaying = isPlaying
+    self.shuffleButtonColor = viewModel.isShuffle ? Color("‌PrimaryColor") : Color("‌ButtonColor")
 
-  var previousAction: () -> (Void)
-  var nextAction: () -> (Void)
-  var playPauseAction: (_ isPlaying: Bool) -> (Void)
-  var shuffleAction: () -> (Void)
-  var repeatAction: () -> (Void)
-  
-  
+  }
+  mutating func setup(){
+    viewModel.metaDataStream.receive(on: RunLoop.main).map { (info) -> Color in
+      return info.repeatMode == .off ? Color("‌ButtonColor") : Color("‌PrimaryColor")
+    }.assign(to: \.shuffleButtonColor, on: self)
+    .store(in: &cancellableSet)
+  }
   var body: some View {
     GeometryReader { proxy in
       
@@ -31,19 +41,19 @@ struct ControlCenterDock: View {
         HStack(){
           Rectangle().foregroundColor(.clear).overlay(
             Image("ShuffleButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit)
-              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).accentColor(Color("‌ButtonColor")).opacity(0)
+              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).accentColor(self.viewModel.isShuffle ? Color("‌PrimaryColor") : Color("‌ButtonColor"))
           ).gesture(
             TapGesture().onEnded({ (_) in
-              self.shuffleAction()
+              self.viewModel.shuffleToggle()
               })
           ).padding(EdgeInsets(top: proxy.size.height * 0.33, leading: 0, bottom: 0, trailing: 0))
           self.makeDockButtons(proxy)
           Rectangle().foregroundColor(.clear).overlay(
-            Image("RepeatButton").renderingMode(.template).resizable().aspectRatio(contentMode: .fit).accentColor(Color("‌ButtonColor"))
-              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center).opacity(0)
+            (Image("RepeatButton")).renderingMode(.template).resizable().aspectRatio(contentMode: .fit).accentColor(self.viewModel.isRepeat ? Color("‌PrimaryColor") : Color("‌ButtonColor"))
+              .frame(width: proxy.size.height * 0.2, height: proxy.size.height * 0.2, alignment: .center)
           ).gesture(
             TapGesture().onEnded({ (_) in
-              self.repeatAction()
+              self.viewModel.repeatToggle()
             })
           ).padding(EdgeInsets(top: proxy.size.height * 0.33, leading: 0, bottom: 0, trailing: 0))
         }
@@ -66,7 +76,7 @@ extension ControlCenterDock {
           .frame(width: proxy.size.height * ratio, height: proxy.size.height * ratio, alignment: .center)
       ).gesture(
         TapGesture().onEnded({ (_) in
-          self.previousAction()
+          self.viewModel.previous()
         })
       )
       Spacer()
@@ -76,7 +86,7 @@ extension ControlCenterDock {
           .frame(width: proxy.size.height * ratio, height: proxy.size.height * ratio, alignment: .center)
       ).gesture(
         TapGesture().onEnded({ (_) in
-          self.nextAction()
+          self.viewModel.next()
         })
       )
       
@@ -113,8 +123,9 @@ extension ControlCenterDock {
       .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding, trailing: 0))
       .gesture(
         TapGesture().onEnded({ (_) in
-          self.isPlaying = !self.isPlaying
-          self.playPauseAction(self.isPlaying)
+          self.isPlaying.toggle()
+          self.isPlaying ? self.viewModel.play() : self.viewModel.pause()
+          
         })
     )
   }
@@ -123,7 +134,7 @@ extension ControlCenterDock {
 
 struct ControlCenterDock_Previews: PreviewProvider {
   static var previews: some View {
-    ControlCenterDock(isPlayingPublisher: CurrentValueSubject<Bool, Never>(false).eraseToAnyPublisher(), previousAction: {}, nextAction: {}, playPauseAction: {_ in }, shuffleAction: {}, repeatAction: {})
+    ControlCenterDock(isPlayingPublisher: CurrentValueSubject<Bool, Never>(false).eraseToAnyPublisher(),  viewModel: ControlCenterVM(router: ControlCenterRouter(platforms: Application.shared.package)))
       .previewLayout(.sizeThatFits)
       .frame(width: 480, height: 100, alignment: .center)
       .padding(0)

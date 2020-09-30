@@ -12,15 +12,16 @@ import Combine
 import Domain
 import UIKit
 
-class CircularArtworkViewModel: ObservableObject {
+class CircularArtworkViewModel: ObservableObject, Identifiable {
   
   //MARK: - Properties
+  var id = UUID()
   var data: Data?
   var shadow = CGFloat(10.0)
   var lineWidth = CGFloat(3.0)
   var hasShadow = true
   private var cancellableSet: Set<AnyCancellable> = []
-  
+ 
   //MARK: - Initialize
   init(model: Data?, shadow: CGFloat = CGFloat(10.0), lineWidth: CGFloat = CGFloat(3.0), hasShadow: Bool = true) {
     self.data = model

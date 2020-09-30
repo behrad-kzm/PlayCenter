@@ -8,7 +8,7 @@
 
 import Foundation
 import Domain
-import Firebase
+//import Firebase
 import UIKit
 public struct AppAnalytics: AnalyticsUseCaseProvider {
   
@@ -19,10 +19,10 @@ public struct AppAnalytics: AnalyticsUseCaseProvider {
   }
   
   public func setupAnalytics() {
-    FirebaseApp.configure()
-    if let userId = UIDevice.current.identifierForVendor?.uuidString{
-      Analytics.setUserID(userId)
-    }
+//    FirebaseApp.configure()
+//    if let userId = UIDevice.current.identifierForVendor?.uuidString{
+//      Analytics.setUserID(userId)
+//    }
   }
 }
 
